@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact Team Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Character image sizes */
+        .character-splash {
+            width: 1920px;
+            height: 1080px;
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+        }
+        .character-portrait {
+            width: 256px;
+            height: 256px;
+            min-width: 92px;
+            min-height: 92px;
+        }
+        .character-card {
+            width: 512px;
+            height: 768px;
+            aspect-ratio: 2/3;
+        }
+        .element-icon {
+            width: 64px;
+            height: 64px;
+        }
+        .character-icon-small {
+            width: 128px;
+            height: 128px;
+        }
+
+        /* Debug outline for image containers */
+        .debug-outline {
+            outline: 2px solid red;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e1b1e',
+                        secondary: '#2d2b30',
+                        accent: '#4a90e2',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-primary min-h-screen">
+    <!-- Debug Info -->
+    <div id="debug-info" class="fixed top-0 right-0 bg-black/80 text-white p-4 m-4 rounded-lg z-50 text-sm">
+        <h3 class="font-bold mb-2">Debug Info:</h3>
+        <pre id="debug-log"></pre>
+    </div>
+
+    <!-- Rest of your HTML content -->
+    <header class="bg-secondary shadow-md">
+        <!-- ... header content ... -->
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div id="character-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <!-- Characters will be loaded here -->
+        </div>
+    </main>
+
+    <script>
+        // Debug logger
+        function debugLog(message) {
+            const debugLog = document.getElementById('debug-log');
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.innerHTML += `[${timestamp}] ${message}\n`;
+            console.log(message);
+        }
+
+        // Test image loading
+        function testImageLoading() {
+            const elements = ['pyro', 'hydro', 'anemo', 'electro', 'dendro', 'cryo', 'geo'];
+            elements.forEach(element => {
+                const img = new Image();
+                img.onload = () => debugLog(`✅ Loaded: ${element}.png`);
+                img.onerror = () => debugLog(`❌ Failed: ${element}.png`);
+                img.src = `./public/elements/icons/${element}.png`;
+            });
+        }
+
+        // Run tests when page loads
+        window.addEventListener('load', testImageLoading);
+    </script>
+    <script src="./js/characters.js"></script>
+</body>
+</html>

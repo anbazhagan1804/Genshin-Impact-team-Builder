@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact Team Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/characters.js"></script>
+    <style>
+        /* Character image sizes */
+        .character-splash {
+            width: 1920px;
+            height: 1080px;
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+        }
+        .character-portrait {
+            width: 256px;
+            height: 256px;
+            min-width: 92px;
+            min-height: 92px;
+        }
+        .character-card {
+            width: 512px;
+            height: 768px;
+            aspect-ratio: 2/3;
+        }
+        .element-icon {
+            width: 64px;
+            height: 64px;
+        }
+        .character-icon-small {
+            width: 128px;
+            height: 128px;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e1b1e',
+                        secondary: '#2d2b30',
+                        accent: '#4a90e2',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-primary min-h-screen">
+    <!-- Header -->
+    <header class="bg-secondary shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold text-white">Team Builder</h1>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="text-white hover:text-accent transition-colors">Home</a>
+                    <a href="#" class="text-white hover:text-accent transition-colors">My Teams</a>
+                    <a href="#" class="text-white hover:text-accent transition-colors">Characters</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Team Builder Section -->
+        <div class="bg-secondary rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">Current Team</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Empty Team Slots -->
+                <div class="aspect-square bg-primary/30 rounded-lg border-2 border-dashed border-gray-600 flex items-center justify-center">
+                    <span class="text-gray-500">Empty Slot</span>
+                </div>
+                <div class="aspect-square bg-primary/30 rounded-lg border-2 border-dashed border-gray-600 flex items-center justify-center">
+                    <span class="text-gray-500">Empty Slot</span>
+                </div>
+                <div class="aspect-square bg-primary/30 rounded-lg border-2 border-dashed border-gray-600 flex items-center justify-center">
+                    <span class="text-gray-500">Empty Slot</span>
+                </div>
+                <div class="aspect-square bg-primary/30 rounded-lg border-2 border-dashed border-gray-600 flex items-center justify-center">
+                    <span class="text-gray-500">Empty Slot</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Character Selection -->
+        <div>
+            <h2 class="text-2xl font-bold text-white mb-4">Select Characters</h2>
+            <!-- Element Filters -->
+            <div class="flex flex-wrap gap-2 mb-4">
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-red-600 hover:bg-red-700 relative group transition-all p-2" data-element="Pyro" title="Pyro">
+                    <img src="./public/elements/icons/pyro.png" alt="Pyro" class="w-full h-full object-contain">
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Pyro</span>
+                </button>
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-blue-600 hover:bg-blue-700 relative group p-2" data-element="Hydro" title="Hydro">
+                    <img src="./public/elements/icons/hydro.png" alt="Hydro" class="w-full h-full object-contain">
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Hydro</span>
+                </button>
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-teal-600 hover:bg-teal-700 relative group p-2" data-element="Anemo" title="Anemo">
+                    <img src="./public/elements/icons/anemo.png" alt="Anemo" class="w-full h-full object-contain">
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Anemo</span>
+                </button>
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-purple-600 hover:bg-purple-700 relative group p-2" data-element="Electro" title="Electro">
+                    <img src="./public/elements/icons/electro.png" alt="Electro" class="w-full h-full object-contain">
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Electro</span>
+                </button>
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-green-600 hover:bg-green-700 relative group p-2" data-element="Dendro" title="Dendro">
+                    <img src="./public/elements/icons/dendro.png" alt="Dendro" class="w-full h-full object-contain">
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Dendro</span>
+                </button>
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-cyan-600 hover:bg-cyan-700 relative group p-2" data-element="Cryo" title="Cryo">
+                    <img src="./public/elements/icons/cryo.png" alt="Cryo" class="w-full h-full object-contain">
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Cryo</span>
+                </button>
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-yellow-600 hover:bg-yellow-700 relative group p-2" data-element="Geo" title="Geo">
+                    <img src="./public/elements/icons/geo.png" alt="Geo" class="w-full h-full object-contain">
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Geo</span>
+                </button>
+                <button class="element-filter w-12 h-12 rounded-full text-white bg-gray-600 hover:bg-gray-700 relative group p-2" data-element="" title="All Elements">
+                    <span class="text-2xl">*</span>
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs bg-black/80 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">All</span>
+                </button>
+            </div>
+
+            <!-- Character Grid -->
+            <div class="character-grid grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Characters will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary py-6 mt-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-white text-sm">
+                <p>This site is not affiliated with or endorsed by HoYoverse.</p>
+                <p>Genshin Impact™ is a registered trademark of HoYoverse.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
